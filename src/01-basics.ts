@@ -67,6 +67,4 @@ export const colleagues : ColleagueHistory = {
   former: [],
 };
 
-
 console.log(colleagues.current[0]);
-
