@@ -60,5 +60,4 @@ function findFriends(
   .map((friend) => ({ name: friend.name }));
 }
 
-console.log(addInterest(friends[0], 'Politics'))
 
