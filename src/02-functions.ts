@@ -31,13 +31,24 @@ function addColleague(
   });
 }
 
+function addInterest(friend: Friend, interest: string): Friend {
+  friend.interests ??= [];
+  friend.interests.push(interest);
+  return friend;
+}
+
 function sortColleagues(
   colleagues: Colleague[],
-  sorter: (c1: Colleague, c2: Colleague) => number
+  sorter: (c1: Colleague, c2: Colleague) => number,
+  max? : number
 ): EmailContact[] {
-  const sorted = colleagues.sort(sorter); // Colleague[] inferred
-  const result: EmailContact[] = sorted.map((ce) => ({ name: ce.name, email: ce.contact.email }));
-  return result 
+  let end = colleagues.length;
+  if (max !== undefined) {
+     end = max < 2 ? 1 : max
+  }
+  const sorted = colleagues.sort(sorter);
+  const fullResult =  sorted.map((ce) => ({ name: ce.name, email: ce.contact.email }));
+  return fullResult.slice(0,end)
 }
 
 function findFriends(
@@ -49,5 +60,5 @@ function findFriends(
   .map((friend) => ({ name: friend.name }));
 }
 
-console.log(findFriends(friends, (friend) => friend.name.startsWith('Pa')));
-console.log(findFriends(friends, (friend) => friend.age < 35));
+console.log(addInterest(friends[0], 'Politics'))
+
